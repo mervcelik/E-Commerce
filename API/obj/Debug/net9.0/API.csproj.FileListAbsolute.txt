@@ -155,3 +155,5 @@ C:\Projects\e-commerce\API\obj\Debug\net9.0\API.genruntimeconfig.cache
 C:\Projects\e-commerce\API\obj\Debug\net9.0\ref\API.dll
 C:\Projects\e-commerce\api\obj\Debug\net9.0\API.sourcelink.json
 C:\Projects\e-commerce\api\bin\Debug\net9.0\API.staticwebassets.runtime.json
+C:\Projects\E-Commerce\API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Projects\E-Commerce\API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll

@@ -10,8 +10,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 var app = builder.Build();
@@ -21,15 +21,16 @@ app.UseMiddleware<API.Middlewares.ExceptionHandling>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/openapi/v1.json", "Demo API");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API");
+        options.RoutePrefix = string.Empty;
     });
 }
 
 app.UseStaticFiles();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors(options =>
 {
