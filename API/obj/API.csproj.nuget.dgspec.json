@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\e-commerce\\api\\API.csproj": {}
+    "C:\\Projects\\e-commerce\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\e-commerce\\api\\API.csproj": {
+    "C:\\Projects\\e-commerce\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\e-commerce\\api\\API.csproj",
+        "projectUniqueName": "C:\\Projects\\e-commerce\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Projects\\e-commerce\\api\\API.csproj",
+        "projectPath": "C:\\Projects\\e-commerce\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Celiks\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\e-commerce\\api\\obj\\",
+        "outputPath": "C:\\Projects\\e-commerce\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
