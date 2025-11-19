@@ -1,14 +1,26 @@
-import { CircularProgress, Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import { CircularProgress, Divider, Grid, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { IProduct } from "../../model/IProduct";
 import requests from "../../api/request";
 import NotFound from "../../errors/NotFound";
+import { LoadingButton } from "@mui/lab";
+import { AddShoppingCart } from "@mui/icons-material";
+import { useCartContext } from "../../context/CartContext";
+import { toast } from "react-toastify";
+import { currencyTRY } from "../../utils/formatCurrency";
 
 export default function ProductDetails() {
+
+    const { cart, setCart } = useCartContext();
     const { id } = useParams();
     const [product, setProduct] = useState<IProduct>();
     const [loading, setLoading] = useState(true);
+    const [isAdded, setIsAdded] = useState(false);
+
+    const item = cart?.cartItems.find(i => i.productId === product?.id);
+
+
     useEffect(() => {
         id && requests.Catalog.details(parseInt(id))
             .then(data => setProduct(data))
@@ -16,6 +28,18 @@ export default function ProductDetails() {
             .finally(() => setLoading(false));
     }, [id]);
 
+
+    function handleAddItem(id: number) {
+        setIsAdded(true);
+
+        requests.Cart.addItem(id)
+            .then(cart => {
+                setCart(cart);
+                toast.success("Ürün Sepetinize Eklendi");
+            })
+            .catch(error => console.log(error))
+            .finally(() => setIsAdded(false));
+    }
     if (loading) return <CircularProgress />;
     if (!product) return <NotFound />;
     return (
@@ -26,7 +50,7 @@ export default function ProductDetails() {
             <Grid size={{ xl: 9, lg: 8, md: 7, sm: 6, xs: 12 }}>
                 <Typography variant="h3">{product.name}</Typography>
                 <Divider sx={{ mb: 2 }} />
-                <Typography variant="h4" color="secondary">{(product.price / 100).toFixed(2)} ₺</Typography>
+                <Typography variant="h4" color="secondary">{currencyTRY.format(product.price)} ₺</Typography>
                 <TableContainer>
                     <Table>
                         <TableBody>
@@ -45,6 +69,12 @@ export default function ProductDetails() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Stack direction="row" sx={{mt:3}} alignItems="center">
+                    <LoadingButton variant="outlined" loadingPosition="start" startIcon={<AddShoppingCart />} loading={isAdded} onClick={() => handleAddItem(product.id)}>
+                        Sepete Ekle
+                    </LoadingButton>
+                    {item?.quantity! > 0 && <Typography sx={{ ml: 2 }} variant="h6" color="secondary">Sepette {item?.quantity} adet eklendi </Typography>}
+                </Stack>
             </Grid>
         </Grid>
     )
