@@ -1,0 +1,17 @@
+import { Button, ButtonGroup, Typography } from "@mui/material";
+import { decrement, increment, incrementByAmount, useAppDispatch, useAppSelector } from "./counterSlice";
+
+export default function Counter() {
+    const count = useAppSelector((state)=>state.counter.value);
+    const dispatch = useAppDispatch();
+    return (
+        <>
+            <Typography variant="h3">{count}</Typography>
+            <ButtonGroup>
+                <Button onClick={()=>dispatch(increment())}>İncrement</Button>
+                <Button onClick={()=>dispatch(decrement())}>decrement</Button>
+                <Button onClick={()=>dispatch(incrementByAmount(5))}>İncrementByAmount</Button>
+            </ButtonGroup>
+        </>
+    )
+}

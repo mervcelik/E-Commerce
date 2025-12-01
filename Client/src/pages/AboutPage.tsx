@@ -1,7 +1,12 @@
 import { Typography } from "@mui/material";
+import Counter from "./counter/counter";
 
 export default function AboutPage() {
     return (
-        <Typography variant="h2">About Page</Typography>
+        <>
+                <Typography variant="h2">About Page</Typography>
+                <Counter></Counter>
+        </>
+
     )
 }
